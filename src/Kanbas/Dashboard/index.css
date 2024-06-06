@@ -1,0 +1,44 @@
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .course-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .course-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .course-info {
+    padding: 10px;
+  }
+  
+  .course-title {
+    display: block;
+    font-weight: bold;
+    color: #333;
+    margin-top: 10px;
+  }
+  
+  .course-link {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  

@@ -1,0 +1,47 @@
+.container {
+    max-width: 1000px;
+    margin: 20px auto;
+}
+
+.search-bar, .btn-group {
+    margin-bottom: 15px;
+}
+
+.table-responsive {
+    background-color: white;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn, .form-control {
+    height: 38px;
+}
+
+
+.btn-outline-primary {
+    color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.dropdown-toggle::after {
+    display: none; /* 移除下拉箭头，如果不需要 */
+}
+
+/* 输入框的默认样式，例如在表格中 */
+input[type="text"].form-control {
+    width: auto; /* 自动宽度 */
+    display: inline-block; /* 行内显示 */
+}
