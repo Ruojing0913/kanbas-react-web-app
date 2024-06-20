@@ -1,7 +1,20 @@
-import { Link } from 'react-router-dom';
-
+import React from 'react';
+import { Link, useParams, useLocation } from 'react-router-dom';
 
 export default function CoursesNavigation() {
+    const { cid } = useParams();
+    const location = useLocation();
+
+    const links = [
+        { name: "Home", path: "Home" },
+        { name: "Modules", path: "Modules" },
+        { name: "Piazza", path: "Piazza" },
+        { name: "Zoom", path: "Zoom" },
+        { name: "Assignments", path: "Assignments" },
+        { name: "Quizzes", path: "Quizzes" },
+        { name: "Grades", path: "Grades" }
+    ];
+
     return (
         <>
             <style>
@@ -24,20 +37,23 @@ export default function CoursesNavigation() {
                     display: block;
                 }
 
-                #wd-courses-navigation a:hover {
+                #wd-courses-navigation a:hover, #wd-courses-navigation .active {
                     color: darkred;
                 }
                 `}
             </style>
             <ul id="wd-courses-navigation">
-            <li><Link to="/Kanbas/Courses/1234/Home">Home</Link></li>
-            <li><Link to="/Kanbas/Courses/1234/Modules">Modules</Link></li>
-            <li><Link to="/Kanbas/Courses/1234/Piazza">Piazza</Link></li>
-            <li><Link to="/Kanbas/Courses/1234/Zoom">Zoom</Link></li>
-            <li><Link to="/Kanbas/Courses/1234/Assignments">Assignments</Link></li>
-            <li><Link to="/Kanbas/Courses/1234/Quizzes">Quizzes</Link></li>
-            <li><Link to="/Kanbas/Courses/1234/Grades">Grades</Link></li>
-        </ul>
+                {links.map(link => (
+                    <li key={link.name}>
+                        <Link
+                            to={`/Kanbas/Courses/${cid}/${link.path}`}
+                            className={location.pathname.includes(link.path) ? 'active' : ''}
+                        >
+                            {link.name}
+                        </Link>
+                    </li>
+                ))}
+            </ul>
         </>
     );
 }
