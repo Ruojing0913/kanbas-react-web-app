@@ -1,67 +1,60 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import db from '../Database';
 
-export default function Dashboard() {
+interface Course {
+  _id: string;
+  name: string;
+  number: string;
+  startDate: string;
+  endDate: string;
+  image?: string;
+  description: string;
+  department?: string;
+  credits?: number;
+  author?: string;
+}
 
-  const courses = db.courses;
+export default function Dashboard() {
+  const [courses, setCourses] = useState<Course[]>(db.courses);
+  const [course, setCourse] = useState<Course>({
+    _id: "0",
+    name: "New Course",
+    number: "New Number",
+    startDate: "2023-09-10",
+    endDate: "2023-12-15",
+    image: "/images/reactjs.jpg",
+    description: "New Description"
+  });
+
+  const addNewCourse = () => {
+    const newCourse = { ...course, _id: new Date().getTime().toString() };
+    setCourses([...courses, newCourse]);
+  };
+
+  const deleteCourse = (courseId: string) => {
+    setCourses(courses.filter(course => course._id !== courseId));
+  };
 
   return (
-
-    <div id="wd-dashboard">
-
-      <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
-
-      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2> <hr />
-
-      <div id="wd-dashboard-courses" className="row">
-
-        <div className="row row-cols-1 row-cols-md-5 g-4">
-
-          {courses.map((course) => (
-
-            <div className="wd-dashboard-course col" style={{ width: "300px" }}>
-
-              <Link to={`/Kanbas/Courses/${course._id}/Home`} className="text-decoration-none" >
-
-                <div className="card rounded-3 overflow-hidden">
-
-                  <img src="/images/reactjs.jpg" height="{160}" />
-
-                  <div className="card-body">
-
-                    <span className="wd-dashboard-course-link"
-
-                      style={{ textDecoration: "none", color: "navy", fontWeight: "bold" }} >
-
-                      {course.name}
-
-                    </span>
-
-                    <p className="wd-dashboard-course-title card-text" style={{ maxHeight: 53, overflow: "hidden" }}>
-
-                      {course.description}
-
-                    </p>
-
-                    <Link to={`/Kanbas/Courses/${course._id}/Home`} className="btn btn-primary">Go</Link>
-
-                  </div>
-
-                </div>
-
-              </Link>
-
+    <div className="p-4" id="wd-dashboard">
+      <h1 id="wd-dashboard-title">Dashboard</h1>
+      <hr />
+      <h2 id="wd-dashboard-published">Published Courses ({courses.length})</h2>
+      <hr />
+      {courses.map((course) => (
+        <div key={course._id} className="col">
+          <div className="card">
+            <div className="card-body">
+              <h5 className="card-title">{course.name}</h5>
+              <p className="card-text">{course.description}</p>
+              <Link to={`/Kanbas/Courses/${course._id}`} className="btn btn-primary">View</Link>
+              <button onClick={() => deleteCourse(course._id)} className="btn btn-danger">Delete</button>
             </div>
-
-          ))}
-
+          </div>
         </div>
-
-      </div>
-
+      ))}
+      <button onClick={addNewCourse} className="btn btn-primary">Add New Course</button>
     </div>
-
   );
-
 }

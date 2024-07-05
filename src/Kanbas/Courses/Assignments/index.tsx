@@ -4,7 +4,6 @@ import { FiCheckCircle, FiMoreVertical } from 'react-icons/fi';
 import { Link, useParams } from 'react-router-dom';
 import db from "../../Database";
 
-// 定义 Assignment 类型
 type Assignment = {
   _id: string;
   title: string;
@@ -18,7 +17,7 @@ export default function Assignments() {
   const [filteredAssignments, setFilteredAssignments] = useState<Assignment[]>([]);
 
   useEffect(() => {
-    // 确保 cid 已定义并且 db.assignments 是有效的
+  
     if (cid && db.assignments) {
       const assignments = db.assignments.filter((assignment: Assignment) => assignment.course === cid);
       setFilteredAssignments(assignments);
